@@ -1,0 +1,48 @@
+type Category {
+  id: ID!
+  name: String!
+}
+
+enum PostPublishStatus {
+  ANYONE
+  ONLY_ME
+}
+
+type Post implements Node {
+  id: ID!
+  title: String!
+  body: String!
+  categories: [Category!]!
+  user: User!
+  status: PostPublishStatus!
+  createdAt: Time!
+  updatedAt: Time!
+}
+
+input NewPost {
+  title: String!
+  body: String!
+  categories: [ID!]!
+}
+
+enum PostOrderKey {
+  TITLE
+  CREATED_AT
+  UPDATED_AT
+}
+
+input PostFilterCondition {
+  userId: String!
+  status: Int!
+}
+
+type PostEdge implements Edge {
+  node: Post
+  cursor: Cursor!
+}
+
+type PostConnection implements Connection {
+  pageInfo: PageInfo!
+  edges: [PostEdge!]!
+  totalCount: Int!
+}

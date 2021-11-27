@@ -1,0 +1,22 @@
+input OrderKey {
+  post: PostOrderKey
+}
+
+enum OrderDirection {
+  ASC
+  DESC
+}
+
+input EdgeOrder {
+  key: OrderKey!
+  direction: OrderDirection!
+}
+
+type Query {
+  posts(pageCondition: PageCondition, filterCondition: PostFilterCondition!, edgeOrder: EdgeOrder!): PostConnection!
+}
+
+type Mutation {
+  createUser(input: NewUser!): User!
+  createPost(input: NewPost!): Post!
+}
